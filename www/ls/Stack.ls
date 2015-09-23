@@ -38,6 +38,20 @@ listItems = list.selectAll \li .data data .enter!append \li
   ..append \span
     ..attr \class \title
     ..html -> it['nemocnice']
+    ..filter ((d, i) -> i == 0)
+      ..append \svg
+        ..attr \width 18
+        ..attr \height 21
+        ..append \rect
+          ..attr \width 17
+          ..attr \height 20
+        ..append \rect
+          ..attr \width 17
+          ..attr \height 4
+        ..append \circle
+          ..attr \cy 12
+          ..attr \cx 9
+          ..attr \r 5
   ..append \div
     ..attr \class \bar
     ..append \div
