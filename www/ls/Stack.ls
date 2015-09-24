@@ -83,3 +83,9 @@ listItems = list.selectAll \li .data data .enter!append \li
       ..attr \height 4
       ..append \line
         ..attr \x2 -> countScale it.count
+
+legendItems = ['Počet lůžek']
+container.append \ul
+  ..attr \class \legend
+  ..selectAll \li .data legendItems .enter!append \li
+    ..html -> it
