@@ -9,6 +9,7 @@ graphTip = new ig.GraphTip container
 data = d3.tsv.parse ig.data.pradlo, (row) ->
   row.count = parseInt row['počet lůžek'], 10
   row.price = parseInt row['náklady na prádlo na jedno lůžko ročně'], 10
+  row.laundromat = row['má vlastní prádelnu'] == "T"
   row
 
 lineHeight = 36px
@@ -26,9 +27,11 @@ countScale = d3.scale.linear!
 list = container.append \ul
   ..attr \class \barchart
 displayTooltip = ->
-  text = "<b>#{it.nemocnice}</b>:<br>
+  text = "<b>#{it.nemocnice}</b><br>
     Roční náklady na prádlo na jedno lůžko: <b>#{ig.utils.formatNumber it.price} Kč</b><br>
     Počet lůžek: <b>#{ig.utils.formatNumber it.count}</b>"
+  if it.laundromat
+    text += "<br>Nemocnice má vlastní prádelnu"
   offset = ig.utils.offset @
   graphTip.display offset.left + 0.5 * @clientWidth, offset.top - 5, text
 hideTooltip = ->
@@ -37,8 +40,11 @@ listItems = list.selectAll \li .data data .enter!append \li
   ..style \top (d, i) -> "#{i * lineHeight}px"
   ..append \span
     ..attr \class \title
+    ..on \mouseover displayTooltip
+    ..on \touchstart displayTooltip
+    ..on \mouseout hideTooltip
     ..html -> it['nemocnice']
-    ..filter ((d, i) -> i == 0)
+    ..filter (.laundromat)
       ..append \svg
         ..attr \width 18
         ..attr \height 21
