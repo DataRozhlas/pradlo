@@ -2,9 +2,9 @@ sum = -> it.reduce (curr, prev = 0) -> prev + curr
 container = d3.select ig.containers.base
   ..classed \stack yes
   ..append \h1
-    ..html "Ostravská fakultní nemocnice pere 3 × dráž než pražská Thomayerova nemocnice"
+    ..html "Ostravská fakultní nemocnice pere třikrát dráž než pražská Thomayerova nemocnice"
   ..append \h2
-    ..html "Objem prádla je přitom srovnatelný."
+    ..html "Počet lůžek je přitom srovnatelný."
 graphTip = new ig.GraphTip container
 data = d3.tsv.parse ig.data.pradlo, (row) ->
   row.count = parseInt row['počet lůžek'], 10
