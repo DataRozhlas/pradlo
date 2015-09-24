@@ -48,6 +48,11 @@ listItems = list.selectAll \li .data data .enter!append \li
         ..append \rect
           ..attr \width 17
           ..attr \height 4
+        ..append \line
+          ..attr \x1 12
+          ..attr \x2 16
+          ..attr \y1 2
+          ..attr \y2 2
         ..append \circle
           ..attr \cy 12
           ..attr \cx 9
